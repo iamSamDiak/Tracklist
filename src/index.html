@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>Electron</title>
+</head>
+<body>
+    <div class="if-error hidden">
+        <div class="if-error-message">
+            <p>Couldn’t load the track! Make sure that your file isn’t corrupt</p>
+        </div>
+        <div class="if-error-ok">
+            <p>OK</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="taskbar-content">
+            <div class="taskbar draggable">
+            </div>
+            <div class="taskbar-minimize-close">
+                <div class="minimize">
+                    <img src="./assets/minimize.png" alt="">
+                </div>
+                <div class="close">
+                    <img src="./assets/close.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="playlist" class="app-title">
+            <h1>Tracklist.</h1>
+        </div>
+        <div class="playlist-flexbox">
+            <div class="playlist-container">
+                <div class="playlist-id" id="-1"></div>
+                <div class="playlist-cover">
+                </div>
+                <div class="playlist-title">
+                    <p>No track</p>
+                </div>
+                <div class="playlist-timeline">
+                    <div class="playlist-timeline-start">
+                        <p>00:00</p>
+                    </div>
+                    <div class="playlist-timeline-spectrum">
+                        <div class="progress-bar-invisible"></div>
+                        <div class="progress-bar"></div>
+                        <div class="progress-dot"></div>
+                    </div>
+                    <div class="playlist-timeline-end">
+                        <p>00:00</p>
+                    </div>
+                </div>
+                <div class="playlist-controls">
+                    <div class="playlist-controls-back">
+                        <img src="./assets/rewind.png" alt="">
+                    </div>
+                    <div class="playlist-controls-play-pause">
+                        <img src="./assets/play.png" alt="">
+                    </div>
+                    <div class="playlist-controls-forward">
+                        <img src="./assets/forward.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="playlist-tracklist">
+                <!-- tracklist -->
+                <div class="playlist-tracklist-container">
+                </div>
+                <!-- end tracklist -->
+                <div class="playlist-tracklist-import">
+                    <div class="playlist-tracklist-import-open">
+                        <img src="./assets/add.png" alt="">
+                    </div>
+                    <div class="playlist-tracklist-import-track">
+                        <p>Import a track</p>
+                    </div>
+                    <input class="importTrackInput" hidden type="file" accept="audio/mp3">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./Tracklist.js"></script>
+    <script src="./Track.js"></script>
+    <script src="./index.js"></script>
+    <script src="./error.js"></script>
+    <script src="./renderer.js"></script>
+    <script src="./importFile.js"></script>
+    <script src="./controls.js"></script>
+</body>
+</html>
