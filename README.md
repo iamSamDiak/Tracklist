@@ -6,12 +6,12 @@
 
 ### About
 
-**Tracklist** is a simple app in progress build with <a href="https://electronjs.org" target="_blank"> **Electron**</a> where you can load music to listen to in a playlist.
+**Tracklist** is a simple work-in-progress app built with <a href="https://electronjs.org" target="_blank"> **Electron**</a> that allows you to load music into a playlist for listening.
 
 New features incoming such as : 
 - EQ parameters
-- Fade In/Out transition between tracks
-- Reverberation, Chorus, etc...
+- Fade In/out transition between tracks
+- Reverberation, chorus, etc...
 
 ## 
 
