@@ -6,7 +6,7 @@
 
 ### About this branch
 
-Where all the bugs are fixed before merging with the `dev` branch.
+Where all the bugs are fixed before merging with the ***dev*** branch.
 
 ##
 
