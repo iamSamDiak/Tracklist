@@ -1,16 +1,8 @@
-<style>
-hr {
-  border: none;
-  border-top: 1px solid #ccc;
-  margin: 20px 0;
-}
-</style>
-
-<div style="center">
+<div align="center">
 <img src="https://i.ibb.co/QjSHzMX/tracklist.png" style="width:50%">
 </div>
 
-<hr>
+## 
 
 ### About
 
@@ -21,7 +13,7 @@ New features incoming such as :
 - Fade In/Out transition between tracks
 - Reverberation, Chorus, etc...
 
-<hr>
+## 
 
 ### How to use it
 
