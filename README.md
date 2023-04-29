@@ -1,4 +1,5 @@
-<img src="https://i.ibb.co/n8d1ZjR/tracklist.png" style="width:100px">
+<img src="https://i.ibb.co/QjSHzMX/tracklist.png">
+
 ___
 
 ### About
