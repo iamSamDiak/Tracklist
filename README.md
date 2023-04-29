@@ -1,4 +1,6 @@
-<img src="https://i.ibb.co/QjSHzMX/tracklist.png">
+<center>
+<img src="https://i.ibb.co/QjSHzMX/tracklist.png" style="width:50%">
+</center>
 
 ___
 
