@@ -1,8 +1,16 @@
-<center>
-<img src="https://i.ibb.co/QjSHzMX/tracklist.png" style="width:50%">
-</center>
+<style>
+hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 20px 0;
+}
+</style>
 
-___
+<div style="center">
+<img src="https://i.ibb.co/QjSHzMX/tracklist.png" style="width:50%">
+</div>
+
+<hr>
 
 ### About
 
@@ -12,7 +20,8 @@ New features incoming such as :
 - EQ parameters
 - Fade In/Out transition between tracks
 - Reverberation, Chorus, etc...
-___
+
+<hr>
 
 ### How to use it
 
