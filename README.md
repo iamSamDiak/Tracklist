@@ -1,8 +1,5 @@
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
-</style>
-<h1 align="center" style="margin-top:-1px;font-size:50px;font-family: 'Roboto', sans-serif;letter-spacing:-1px;font-weight:700">Tracklist.</h1>
-
+<img src="https://i.ibb.co/n8d1ZjR/tracklist.png" style="width:10px">
+___
 ### About
 
 **Tracklist** is a simple app in progress build with <a href="https://electronjs.org" target="_blank"> **Electron**</a> where you can load music to listen to in a playlist.
@@ -11,10 +8,10 @@ New features incoming such as :
 - EQ parameters
 - Fade In/Out transition between tracks
 - Reverberation, Chorus, etc...
----
+___
 ### How to use it
 
-- ####Development Setup
+- #### Development Setup
 
 	Clone this repo.
 
