@@ -8,3 +8,7 @@
 
 Where all the bugs are fixed before merging with the `dev` branch.
 
+##
+
+#### List of bugs to fix :
+ - Base64 files from imported audios won't load
