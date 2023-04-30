@@ -30,7 +30,7 @@ $(".progress-bar-invisible").on({
         const x = event.offsetX;
         const width = this.offsetWidth;
         const percentage = x / width * 100;
-        const index = $(".playlist-tracklist-container").find(".playlist-tracklist-item-infos").index()
+        const index = $(".playlist-tracklist-container").find(".active").index()
         console.log(index)
         tracklist.tracks[index].playAtThatPosition(percentage)
     }
