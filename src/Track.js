@@ -66,7 +66,6 @@ class Track{
 
         const { duration } = this.metadata;
 
-        console.log(( duration / (1/time)) / 100)
         this.audio.currentTime = (duration / (1/time)) / 100;
     }
 
@@ -89,54 +88,6 @@ class Track{
         return progressPercentage.toFixed(2);
     }
 
-    spectrum(){
-        // Wait for audio to be loaded
-        this.audio.addEventListener('loadeddata', () => {
-            // Get audio context
-            const audioContext = new AudioContext();
-
-            // Create audio source node
-            const sourceNode = audioContext.createMediaElementSource(audio);
-
-            // Create analyser node
-            const analyserNode = audioContext.createAnalyser();
-            analyserNode.fftSize = 2048;
-
-            // Connect audio source node to analyser node
-            sourceNode.connect(analyserNode);
-
-            // Connect analyser node to audio context destination
-            analyserNode.connect(audioContext.destination);
-
-            // Get frequency data
-            const bufferLength = analyserNode.frequencyBinCount;
-            const dataArray = new Uint8Array(bufferLength);
-            analyserNode.getByteFrequencyData(dataArray);
-
-            // Create canvas
-            const canvas = document.querySelector('canvas');
-            canvas.width = bufferLength;
-            canvas.height = 100;
-            const ctx = canvas.getContext('2d');
-
-        // Draw spectrum on canvas
-            function draw() {
-                requestAnimationFrame(draw);
-                analyserNode.getByteFrequencyData(dataArray);
-                ctx.fillStyle = '#e4e4e4';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                const barWidth = canvas.width / bufferLength;
-                let x = 0;
-                for (let i = 0; i < bufferLength; i++) {
-                    const barHeight = dataArray[i] / 2;
-                    ctx.fillStyle = `rgba(50, 50, 50, 0.${barHeight})`;
-                    ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
-                    x += barWidth;
-                }
-            }
-            draw();
-        })
-    }
 }
 
 module.exports = { Track };
