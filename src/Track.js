@@ -66,7 +66,6 @@ class Track{
 
         const { duration } = this.metadata;
 
-        console.log(( duration / (1/time)) / 100)
         this.audio.currentTime = (duration / (1/time)) / 100;
     }
 
