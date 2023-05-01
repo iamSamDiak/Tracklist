@@ -1,7 +1,7 @@
 {
-  "name": "playlist",
+  "name": "Tracklist",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple playlist app. Load some music and enjoy...",
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
@@ -17,5 +17,16 @@
     "electron-drag": "^2.0.0",
     "jquery": "^3.6.4",
     "music-metadata": "^8.1.4"
+  },
+  "build": {
+    "appId": "com.samdiak.tracklist",
+    "productName": "Tracklist",
+    "directories": {
+        "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "./build/icon.ico"
+    }
   }
 }
