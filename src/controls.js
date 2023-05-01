@@ -1,6 +1,3 @@
-
-// Play, pause, next, previous
-
 // Previous
 $('.playlist-controls-back').on("click", function() {
     tracklist.previous()
@@ -36,7 +33,6 @@ $(".progress-bar-invisible").on({
 })
 
 // On the playlist
-
 const items = $(".playlist-tracklist-container")
 
 items.on("click", ".playlist-tracklist-item-infos", function() {

@@ -168,7 +168,6 @@ class Tracklist{
         for (const track of this.tracks) {
             track.stop()
         }
-        //
         this.tracks = [];
         this.isPlaying = false;
         this.resetDom()
