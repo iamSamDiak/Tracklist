@@ -87,7 +87,4 @@ class Track{
         const progressPercentage = (currentTime / duration) * 100;
         return progressPercentage.toFixed(2);
     }
-
 }
-
-module.exports = { Track };
