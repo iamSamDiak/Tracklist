@@ -1,6 +1,3 @@
-
-// Play, pause, next, previous
-
 // Previous
 $('.playlist-controls-back').on("click", function() {
     tracklist.previous()
@@ -31,13 +28,11 @@ $(".progress-bar-invisible").on({
         const width = this.offsetWidth;
         const percentage = x / width * 100;
         const index = $(".playlist-tracklist-container").find(".active").index()
-        console.log(index)
         tracklist.tracks[index].playAtThatPosition(percentage)
     }
 })
 
 // On the playlist
-
 const items = $(".playlist-tracklist-container")
 
 items.on("click", ".playlist-tracklist-item-infos", function() {

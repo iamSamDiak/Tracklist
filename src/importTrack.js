@@ -1,8 +1,5 @@
 const { ipcMain } = require('electron');
 
-/** Load file */
-
-// Listen for IPC messages from renderer processes
 function loadFile(event, filePath) {
     import('music-metadata').then(async (mm) => {
         try {
