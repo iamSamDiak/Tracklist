@@ -10,13 +10,6 @@ class Tracklist{
     }
 
     /*
-        tracklistSelector :
-            - track
-            - item
-            - active
-            - cover
-            - title
-            - duration
         activeTrackSelector :
             - _id
             - cover
@@ -24,6 +17,13 @@ class Tracklist{
             - progress
             - start
             - end
+        tracklistSelector :
+            - track
+            - item
+            - active
+            - cover
+            - title
+            - duration
     */
 
     addTrack(track, setActive = false){
@@ -40,6 +40,7 @@ class Tracklist{
 
         this.tracks.splice(index, 1);
         track.find(item).eq(index).remove();
+
     }
 
     addToTracklist(track, setActive = false){
@@ -118,9 +119,12 @@ class Tracklist{
 
     deleteOnTrackList(index){
         const track = this.tracks[index];
-        const { _id } = this.activeTrackSelector;
+        const { _id, progress } = this.activeTrackSelector;
 
         if (this.tracks.length == 1){
+            progress.prop("disabled", true)
+            _id[0].id = "-1";
+            this.tracklistSelector._id = ""
             this.empty();
             return;
         }
