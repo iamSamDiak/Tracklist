@@ -27,6 +27,7 @@ class Track{
         this.Tracklist.isPlaying = this.playing = true;
 
         this.audio.addEventListener('ended', () => {
+            this.stop();
             this.Tracklist.next()
         });
     }
