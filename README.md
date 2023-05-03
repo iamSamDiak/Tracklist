@@ -10,7 +10,6 @@ Where all the bugs are fixed before merging with the ***dev*** branch.
 ##
 
 #### List of bugs to fix :
- - Track titles overflow issues
  - Time duration sometimes overlaps
  - Next track doesn't play automatically
 
