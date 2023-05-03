@@ -1,7 +1,9 @@
 class Tracklist{
     constructor(activeTrackSelector, tracklistSelector){
         this.tracks = [];
+        this.volume = 1
         this.isPlaying = false;
+        this.mouseOnProgress = false;
         this.trackPlaying = ''
         this.activeTrackSelector = activeTrackSelector,
         this.tracklistSelector = tracklistSelector
@@ -23,15 +25,10 @@ class Tracklist{
             - start
             - end
     */
-    
 
-    addTrack(track, addToList = false, autoplay = true){
+    addTrack(track, setActive = false){
         this.tracks.push(track);
-        if (addToList){
-            this.setActiveTrack(track, addToList, autoplay);
-            return
-        }
-        this.addToTracklist(track.metadata, track.id)
+        this.addToTracklist(track, setActive)
     }
 
     getTracks(){
@@ -45,8 +42,33 @@ class Tracklist{
         track.find(item).eq(index).remove();
     }
 
-    setActiveTrack(_track, addToList = false){
+    addToTracklist(track, setActive = false){
+        const { artist, cover, title, length } = track.metadata;
+        this.tracklistSelector.track.append(`
+        <div id="${track.id}" class="playlist-tracklist-item">
+            <div class="playlist-tracklist-item-infos">
+                <div class="playlist-tracklist-item-cover" style="background-image: url('${cover}')">
+                </div>
+                <div class="playlist-tracklist-item-title">
+                    <p>${title}${artist ? " - " + artist : ''}</p>
+                </div>
+                <div class="playlist-tracklist-item-duration">
+                    <p>${length}</p>
+                </div>
+            </div>
+            <div class="playlist-tracklist-item-delete-track">
+                <img src="./assets/close_track.png" alt="">
+            </div>
+        </div>
+        `)
 
+        if (setActive){
+            this.setActiveTrack(track)
+        }
+    }
+
+
+    setActiveTrack(_track){
         // If the id of the active track has changed
         if (this.trackPlaying != _track.id){   
             for (const t of this.tracks) {
@@ -79,36 +101,19 @@ class Tracklist{
 
         // Get current time
         _track.audio.addEventListener("timeupdate", () => {
-            progress.css("left", `${_track.getProgress()}%`);
+            if (!this.mouseOnProgress){
+                progress.val(`${_track.getProgress()}`);
+            }
             start.text(_track.getCurrentTime());
         })
         // Set the track length
         end.text(metadata.length);
-
-        if (addToList){
-            this.addToTracklist(metadata, _track.id)
-        }
     }
 
-    addToTracklist(metadata, id){
-        const { artist, cover, title, length } = metadata;
-        this.tracklistSelector.track.append(`
-        <div id="${id}" class="playlist-tracklist-item">
-            <div class="playlist-tracklist-item-infos">
-                <div class="playlist-tracklist-item-cover" style="background-image: url('${cover}')">
-                </div>
-                <div class="playlist-tracklist-item-title">
-                    <p>${title}${artist ? " - " + artist : ''}</p>
-                </div>
-                <div class="playlist-tracklist-item-duration">
-                    <p>${length}</p>
-                </div>
-            </div>
-            <div class="playlist-tracklist-item-delete-track">
-                <img src="./assets/close_track.png" alt="">
-            </div>
-        </div>
-        `)
+    setVolume(volume){
+        for (const t of this.tracks) {
+            t.audio.volume = this.volume = volume/100
+        }
     }
 
     deleteOnTrackList(index){

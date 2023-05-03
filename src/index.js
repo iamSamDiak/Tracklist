@@ -4,7 +4,7 @@ const activeTrackSelector = {
     _id: $(".playlist-id"),
     cover: $(".playlist-cover"),
     title: $(".playlist-title p"),
-    progress: $(".progress-dot"),
+    progress: $(".progress-bar"),
     start: $(".playlist-timeline-start p"),
     end: $(".playlist-timeline-end p")
 }
@@ -19,17 +19,3 @@ const tracklistSelector = {
 }
 
 let tracklist = new Tracklist(activeTrackSelector, tracklistSelector);
-
-const handler = {
-    set(target, property, value) {
-        target[property] = value;
-        if (value == true) {
-            $(".playlist-controls-play-pause").find("img").attr("src", "./assets/pause.png");
-        } else {
-            $(".playlist-controls-play-pause").find("img").attr("src", "./assets/play.png");
-        }
-        return true;
-    }
-};
-
-tracklist = new Proxy(tracklist, handler);

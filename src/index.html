@@ -34,8 +34,15 @@
         </div>
         <div class="playlist-flexbox">
             <div class="playlist-container">
-                <div class="playlist-id" id="-1"></div>
-                <div class="playlist-cover">
+                <div class="playlist-volume-cover">
+                    <div class="playlist-id" id="-1"></div>
+                    <div class="playlist-volume">
+                        <input class="volume-range" type="range" min="0" max="100" value="100">
+                    </div>
+                    <div class="playlist-cover-container">
+                        <div class="playlist-cover">
+                        </div>
+                    </div>
                 </div>
                 <div class="playlist-title">
                     <p>No track</p>
@@ -45,9 +52,7 @@
                         <p>00:00</p>
                     </div>
                     <div class="playlist-timeline-spectrum">
-                        <div class="progress-bar-invisible"></div>
-                        <div class="progress-bar"></div>
-                        <div class="progress-dot"></div>
+                        <input class="progress-bar" type="range" min="0" max="100" value="0" disabled>
                     </div>
                     <div class="playlist-timeline-end">
                         <p>00:00</p>
