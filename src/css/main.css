@@ -147,6 +147,7 @@ body{
 }
 
 .volume-range{
+    -webkit-appearance: none;
     transform: rotate(-90deg) translate(-102px, -112px);
     position: absolute;
     width: 225px;
@@ -155,29 +156,12 @@ body{
     height: 1px;
 }
 
-.volume-bar-invisible {
-    height: 100%;
-    width: 50%;
-    position: absolute;
-    left: -7px;
-    z-index: 999;
-}
-
-.volume-bar {
-    width: 1px;
-    background: #0f0f0f;
-    position: absolute;
-    height: 100%;
-}
-
-.volume-dot{
+.volume-range::-webkit-slider-thumb{
+    -webkit-appearance: none;
     width: 10px;
     height: 10px;
-    background: #0f0f0f;
     border-radius: 100%;
-    position: absolute;
-    left: -4px;
-    top: 0;
+    background: #000;
 }
 
 .playlist-cover{
