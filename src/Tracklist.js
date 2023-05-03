@@ -98,6 +98,9 @@ class Tracklist{
         if (metadata.artist){
             // Set the track title and the artist if it is set
             title.text(`${metadata.title} - ${metadata.artist}`);
+            if (title[0].scrollWidth > title[0].clientWidth){
+                title.text( `${ title.text().slice(0, 22) }...` );
+            }
         }
 
         // Get current time

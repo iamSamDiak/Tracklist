@@ -192,6 +192,12 @@ body{
     font-weight: 600;
 }
 
+.overlapping{
+    background-image: linear-gradient(to right, black 90%, #ffffff00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .playlist-timeline{
     display: flex;
     justify-content: space-between;
