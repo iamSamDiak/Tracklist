@@ -20,11 +20,13 @@ for (let i = 0; i < importFile.length; i++) {
   });
 }
 
-inputFileInput.addEventListener('change', () => {
-  const file = inputFileInput.files[0];
-  const fileReader = {
-    path: file.path,
-    name: file.name
-  };
-  ipcRenderer.send("get-metadata", fileReader);
+inputFileInput.addEventListener('change', (e) => {
+  const files = e.target.files;
+  for (let i = 0; i < files.length; i++) {
+    const fileReader = {
+      path: files[i].path,
+      name: files[i].name
+    };
+    ipcRenderer.send("get-metadata", fileReader);
+  }
 });
