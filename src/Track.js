@@ -1,10 +1,11 @@
 class Track{
-    constructor(audio, metadata, Tracklist){
+    constructor(audio, metadata, Tracklist, activeSelector){
         this.id = (() => Math.random().toString(36).substring(2, 5))()
         this.metadata = metadata
         this.audio = new Audio(audio.path);
         this.playing = false;
         this.Tracklist = Tracklist
+        this.activeSelector = activeSelector
     }
 
     /*
@@ -21,32 +22,43 @@ class Track{
             return
         }
 
+        const { selector, button} = this.activeSelector;
+
         this.Tracklist.setActiveTrack(this);
 
+        this.audio.volume = this.Tracklist.volume
+
         this.audio.play();
+        selector.find("img").attr("src", button.pause);
         this.Tracklist.isPlaying = this.playing = true;
 
         this.audio.addEventListener('ended', () => {
+            this.stop()
             this.Tracklist.next()
         });
-    }
 
+    }
+    
     pause(){
         if (this.Tracklist.tracks.length == 0){
             return
         }
-
+        
+        const { selector, button} = this.activeSelector;
         this.Tracklist.isPlaying = this.playing = false;
         this.audio.pause();
+        selector.find("img").attr("src", button.play);
     }
-
+    
     stop(){
         if (this.Tracklist.tracks.length == 0){
             return
         }
-
+        
+        const { selector, button} = this.activeSelector;
         this.Tracklist.isPlaying = this.playing = false;
         this.audio.pause();
+        selector.find("img").attr("src", button.play);
         this.audio.currentTime = 0;
     }
 
