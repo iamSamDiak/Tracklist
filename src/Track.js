@@ -78,6 +78,10 @@ class Track{
         const { duration } = this.metadata;
 
         this.audio.currentTime = (duration / (1/time)) / 100;
+
+        if (!this.Tracklist.isPlaying){
+            this.play()
+        }
     }
 
     getCurrentSeconds(){
