@@ -6,11 +6,6 @@
 
 ### About this branch
 
-Where all the features are added before merging with the ***dev*** branch.
+Where the app is tested before releasing with the ***main*** branch.
 
 ##
-
-#### List of features I'll implement (probably...) :
- - Visual effects based on the frequency of the audio track
- - Import multiple audio tracks at once
- - Volume control
