@@ -13,4 +13,3 @@ Where all the features are added before merging with the ***dev*** branch.
 #### List of features I'll implement (probably...) :
  - Visual effects based on the frequency of the audio track
  - Import multiple audio tracks at once
- - Volume control
