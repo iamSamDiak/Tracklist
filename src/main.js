@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, globalShortcut, BrowserWindow, ipcMain } = require('electron')
 const path = require('path');
 const { loadFile } = require('./importTrack.js');
 
@@ -31,6 +31,10 @@ function createWindow () {
     loadFile(event, filePath);
   });
 
+  globalShortcut.register('CommandOrControl+R', () => {});
+
+  globalShortcut.register('CommandOrControl+Shift+I', () => {});
+
 }
 
 app.whenReady().then(() => {
@@ -44,4 +48,5 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
+
 
