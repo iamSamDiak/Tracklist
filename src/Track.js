@@ -26,6 +26,8 @@ class Track{
 
         this.Tracklist.setActiveTrack(this);
 
+        this.audio.volume = this.Tracklist.volume
+
         this.audio.play();
         selector.find("img").attr("src", button.pause);
         this.Tracklist.isPlaying = this.playing = true;

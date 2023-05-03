@@ -21,6 +21,13 @@ $('.playlist-controls-forward').on("click", function() {
     tracklist.next()
 });
 
+// Volume progress
+$(".volume-range").on({
+    mousemove: function(){
+        tracklist.setVolume( $(this).val() )
+    }
+})
+
 // Update progress
 $(".progress-bar").on({
     mousedown: function(){

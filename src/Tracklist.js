@@ -1,6 +1,7 @@
 class Tracklist{
     constructor(activeTrackSelector, tracklistSelector){
         this.tracks = [];
+        this.volume = 1
         this.isPlaying = false;
         this.mouseOnProgress = false;
         this.trackPlaying = ''
@@ -24,7 +25,6 @@ class Tracklist{
             - start
             - end
     */
-    
 
     addTrack(track, setActive = false){
         this.tracks.push(track);
@@ -108,6 +108,12 @@ class Tracklist{
         })
         // Set the track length
         end.text(metadata.length);
+    }
+
+    setVolume(volume){
+        for (const t of this.tracks) {
+            t.audio.volume = this.volume = volume/100
+        }
     }
 
     deleteOnTrackList(index){
