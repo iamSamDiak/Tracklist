@@ -8,8 +8,15 @@ ipcRenderer.on('metadata', (event, metadata) => {
     const seconds = Math.floor(duration % 60);
     const length = `${minutes >= 10 ? minutes : "0" + minutes}:${seconds >= 10 ? seconds : "0" + seconds}`;
     const _metadata = {title, artist, cover : cover || "./assets/no-picture.jpg", duration, length}
+    const activeSelector = { 
+      selector: $(".playlist-controls-play-pause"),
+      button: {
+        play: "./assets/play.png",
+        pause: "./assets/pause.png"
+      }
+     }
 
-    let track = new Track(filePath, _metadata, tracklist)
+    let track = new Track(filePath, _metadata, tracklist, activeSelector)
 
     $(".progress-bar").prop("disabled", false)
     $(".importTrackInput").val('')
