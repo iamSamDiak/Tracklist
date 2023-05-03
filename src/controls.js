@@ -5,6 +5,9 @@ $('.playlist-controls-back').on("click", function() {
 
 // Play/pause
 $('.playlist-controls-play-pause').on("click", function() {
+    if (tracklist.trackPlaying == ""){
+        return
+    }
     const id = $(".playlist-id")[0].id
     if (tracklist.isPlaying) {
         tracklist.tracks.find(track => track.id === id).pause()
@@ -19,11 +22,18 @@ $('.playlist-controls-forward').on("click", function() {
 });
 
 // Update progress
-$(".progress-bar-invisible").on({
-    click: function(event){
+$(".progress-bar").on({
+    mousedown: function(){
         if (tracklist.trackPlaying == ""){
             return
         }
+        tracklist.mouseOnProgress = true
+    },
+    mouseup: function(event){
+        if (tracklist.trackPlaying == ""){
+            return
+        }
+        tracklist.mouseOnProgress = false
         const x = event.offsetX;
         const width = this.offsetWidth;
         const percentage = x / width * 100;

@@ -11,11 +11,13 @@ ipcRenderer.on('metadata', (event, metadata) => {
 
     let track = new Track(filePath, _metadata, tracklist)
 
+    $(".progress-bar").prop("disabled", false)
+    $(".importTrackInput").val('')
+
     if (tracklist.tracks.length == 0){
         tracklist.addTrack(track, true, false)
         return
     }
     tracklist.addTrack(track)
 
-    $(".importTrackInput").val('')
 });

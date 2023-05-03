@@ -127,6 +127,59 @@ body{
     width: 50%;
 }
 
+.playlist-cover-container {
+    width: 90%;
+    
+}
+
+.playlist-volume-cover {
+    width: 309px;
+    justify-content: space-between;
+    display: flex;
+    margin-top: 12px;
+}
+
+.playlist-volume {
+    width: 10%;
+    height: 80%;
+    position: relative;
+    margin-top: 20px;
+}
+
+.volume-range{
+    transform: rotate(-90deg) translate(-102px, -112px);
+    position: absolute;
+    width: 225px;
+    cursor: pointer;
+    background: #000;
+    height: 1px;
+}
+
+.volume-bar-invisible {
+    height: 100%;
+    width: 50%;
+    position: absolute;
+    left: -7px;
+    z-index: 999;
+}
+
+.volume-bar {
+    width: 1px;
+    background: #0f0f0f;
+    position: absolute;
+    height: 100%;
+}
+
+.volume-dot{
+    width: 10px;
+    height: 10px;
+    background: #0f0f0f;
+    border-radius: 100%;
+    position: absolute;
+    left: -4px;
+    top: 0;
+}
+
 .playlist-cover{
     width: 250px;
     height: 250px;
@@ -172,13 +225,19 @@ body{
 }
 
 .progress-bar {
-    display: flex;
-    align-items: center;
-    position: absolute;
+    -webkit-appearance: none;
     width: 100%;
     background: #000;
     height: 1px;
-    border-radius: 23px;
+    cursor: pointer;
+}
+
+.progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background: #000;
 }
 
 .progress-dot {
@@ -215,7 +274,8 @@ body{
 .playlist-controls-forward,
 .playlist-tracklist-item div,
 .playlist-tracklist-import div,
-.progress-bar-invisible{
+.progress-bar-invisible,
+.volume-bar-invisible{
     cursor: pointer;
 }
 
