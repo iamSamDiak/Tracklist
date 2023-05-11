@@ -100,6 +100,10 @@ class Track{
         return this.audio.currentTime;
     }
 
+    getDuration(){
+        return this.audio.duration;
+    }
+
     getCurrentMinutes(){
         const minutes = Math.floor(this.audio.currentTime / 60);
         const remainingSeconds = Math.floor(this.audio.currentTime % 60);
