@@ -10,6 +10,7 @@ class Effects{
 
     fadeIn(track){
         if (track.audio.currentTime !== 0){
+            // condition to call new Track(...).restoreAudio()
             return
         }
         
@@ -27,19 +28,22 @@ class Effects{
         const interval = 0.1
         const steps = duration / interval
         const incrementStep = 1 / steps; // Amount of gain increment for each step
-        let currentStep = 0;
 
         const fadeInInterval = setInterval(() => {
 
-            currentStep++
+            let currentTime = Math.floor(track.getCurrentTime() / interval)
 
-            gainNode.gain.value = currentStep * incrementStep;
-            console.log("interval")
+            gainNode.gain.value = currentTime * incrementStep;
 
-            if (currentStep >= steps || !this.tracklist.isPlaying) {
-                clearInterval(fadeInInterval);
+            if (currentTime >= steps) {
+                //clearInterval(fadeInInterval);
                 gainNode.gain.value = 1
             }
+
+            if (tracklist.trackPlaying != track.id){
+                clearInterval(fadeInInterval)
+            }
+
         }, interval * 1000)
 
         track.audio.addEventListener("pause", () => {

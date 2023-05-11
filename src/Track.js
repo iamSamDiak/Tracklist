@@ -39,9 +39,6 @@ class Track{
             }
         }
 
-        console.log('Playing')
-
-        //At start
         this.audio.play();
 
         selector.find("img").attr("src", button.pause);
@@ -73,15 +70,15 @@ class Track{
         const { selector, button} = this.activeSelector;
         this.Tracklist.isPlaying = false;
         this.audio.pause();
-        selector.find("img").attr("src", button.play);
         this.audio.currentTime = 0;
+        selector.find("img").attr("src", button.play);
     }
-
+    
     repeat(){
         if (this.Tracklist.tracks.length == 0){
             return
         }
-
+        
         this.audio.pause()
         this.audio.currentTime = 0;
         this.audio.addEventListener('canplay', () => {
