@@ -18,7 +18,7 @@ class Track{
             - length
      */
 
-    play(){
+    play(crossover = false){
         if (this.Tracklist.tracks.length == 0){
             return
         }
@@ -27,9 +27,11 @@ class Track{
             this.restoreAudio()
         }
 
+        if (crossover) console.log(crossover)
+
         const { selector, button} = this.activeSelector;
 
-        this.Tracklist.setActiveTrack(this);
+        this.Tracklist.setActiveTrack(this, crossover);
         this.audio.volume = this.Tracklist.volume
 
         //Effects
@@ -44,10 +46,28 @@ class Track{
         selector.find("img").attr("src", button.pause);
         this.Tracklist.isPlaying = true;
 
-        this.audio.addEventListener('ended', () => {
-            this.stop()
-            this.Tracklist.next()
-        });
+        const ifEnded = () => {
+            console.log("ended")
+            this.stop();
+            this.Tracklist.next();
+        };
+
+        let hasCrossover = false
+
+        this.audio.addEventListener('ended', ifEnded);
+
+        this.audio.addEventListener('timeupdate', () => {
+            if (this.audio.currentTime >= this.audio.duration - 7 && !hasCrossover){
+                console.log("fade out")
+                this.audio.removeEventListener('ended', ifEnded);
+                this.Tracklist.next(true);
+                hasCrossover = true
+            }
+            if (this.audio.currentTime >= this.audio.duration){
+                console.log("previous stopped")
+                this.stop();
+            }
+        })
 
     }
     

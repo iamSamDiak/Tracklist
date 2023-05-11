@@ -68,9 +68,10 @@ class Tracklist{
     }
 
 
-    setActiveTrack(_track){
+    setActiveTrack(_track, crossover = false){
         // If the id of the active track has changed
-        if (this.trackPlaying != _track.id){   
+        // And if fade in/out crossover enabled
+        if (this.trackPlaying != _track.id && !crossover){   
             for (const t of this.tracks) {
                 t.stop()
             }
@@ -101,11 +102,12 @@ class Tracklist{
 
         // Get current time
         _track.audio.addEventListener("timeupdate", () => {
-            if (!this.mouseOnProgress){
+            if (!this.mouseOnProgress && _id[0].id == _track.id){
                 progress.val(`${_track.getProgress()}`);
+                start.text(_track.getCurrentMinutes());
             }
-            start.text(_track.getCurrentMinutes());
         })
+
         // Set the track length
         end.text(metadata.length);
     }
@@ -155,12 +157,12 @@ class Tracklist{
         this.tracks[active].stop();
     }
 
-    next(){
+    next(crossover = false){
         let active;
         const { _id } = this.activeTrackSelector;
         for (let i = 0; i < this.tracks.length; i++){
             if (this.tracks[i].id == _id[0].id && i < this.tracks.length - 1){
-                this.tracks[i + 1].play();
+                this.tracks[i + 1].play(crossover);
                 return
             }
             active = i
