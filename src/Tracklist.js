@@ -104,7 +104,7 @@ class Tracklist{
             if (!this.mouseOnProgress){
                 progress.val(`${_track.getProgress()}`);
             }
-            start.text(_track.getCurrentTime());
+            start.text(_track.getCurrentMinutes());
         })
         // Set the track length
         end.text(metadata.length);
@@ -141,7 +141,7 @@ class Tracklist{
         const { _id } = this.activeTrackSelector;
         for (let i = 0; i < this.tracks.length; i++){
             if (this.tracks[i].id == _id[0].id){
-                if (this.tracks[i].getCurrentSeconds() >= 2 && !afterDelete){
+                if (this.tracks[i].getCurrentTime() >= 2 && !afterDelete){
                     this.tracks[i].repeat();
                     return
                 } else if (i > 0) {

@@ -99,11 +99,11 @@ class Track{
         this.audio.currentTime = (duration / (1/time)) / 100;
     }
 
-    getCurrentSeconds(){
+    getCurrentTime(){
         return this.audio.currentTime;
     }
 
-    getCurrentTime(){
+    getCurrentMinutes(){
         const minutes = Math.floor(this.audio.currentTime / 60);
         const remainingSeconds = Math.floor(this.audio.currentTime % 60);
         const minutesFormatted = minutes < 10 ? `0${minutes}` : minutes;
@@ -113,7 +113,7 @@ class Track{
 
     getProgress() {
         const { duration } = this.metadata;
-        const currentTime = this.getCurrentSeconds();
+        const currentTime = this.getCurrentTime();
         const progressPercentage = (currentTime / duration) * 100;
         return progressPercentage.toFixed(2);
     }
