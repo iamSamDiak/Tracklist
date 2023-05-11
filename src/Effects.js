@@ -35,6 +35,7 @@ class Effects{
         const stepsEnd = durationEnd / interval
         const incrementStep = 1 / stepsStart; // Amount of gain increment for each step
         const decrementStep = 1 / stepsEnd; // Amount of gain increment for each step
+        let delta = 1
 
         const fadeInOutInterval = setInterval(() => {
 
@@ -50,8 +51,12 @@ class Effects{
             // fade out
             if (currentTime >= track.getDuration() / interval - stepsEnd) {
                 let decrease = track.getDuration() / interval - currentTime
-                gainNode.gain.value = decrease * decrementStep
-                console.log(decrease * decrementStep)
+                delta -= 0.007
+                if (delta <= 0) {
+                    delta = 0
+                }
+                gainNode.gain.value = (decrease * decrementStep) * delta
+                console.log(gainNode.gain.value)
             }
 
             if (tracklist.trackPlaying != track.id){
