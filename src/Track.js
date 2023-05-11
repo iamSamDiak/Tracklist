@@ -27,13 +27,10 @@ class Track{
             this.restoreAudio()
         }
 
-        if (crossover) console.log(crossover)
-
-        const { selector, button} = this.activeSelector;
-
-        this.Tracklist.setActiveTrack(this, crossover);
-        this.audio.volume = this.Tracklist.volume
-
+        const { selector, button } = this.activeSelector
+        const fadeInOut = this.effects.options.find(effect => effect.name === "Fade in/out")
+        crossover = fadeInOut.crossover.enabled
+        
         //Effects
         for (const effect of this.effects.options){
             if (effect.enabled){
@@ -41,34 +38,39 @@ class Track{
             }
         }
 
+        this.Tracklist.setActiveTrack(this, crossover);
+        this.audio.volume = this.Tracklist.volume
+        
         this.audio.play();
-
+        
         selector.find("img").attr("src", button.pause);
         this.Tracklist.isPlaying = true;
-
+        
         const ifEnded = () => {
             console.log("ended")
             this.stop();
             this.Tracklist.next();
         };
 
-        let hasCrossover = false
-
         this.audio.addEventListener('ended', ifEnded);
-
-        this.audio.addEventListener('timeupdate', () => {
-            if (this.audio.currentTime >= this.audio.duration - 7 && !hasCrossover){
-                console.log("fade out")
-                this.audio.removeEventListener('ended', ifEnded);
-                this.Tracklist.next(true);
-                hasCrossover = true
-            }
-            if (this.audio.currentTime >= this.audio.duration){
-                console.log("previous stopped")
-                this.stop();
-            }
-        })
-
+        
+        //fade in/out effect enabled
+        if (fadeInOut.enabled && crossover){
+            let hasCrossover = false
+            const { startAfter } = this.effects.options.find(effect => effect.name === 'Fade in/out').crossover;
+            this.audio.addEventListener('timeupdate', () => {
+                if (this.audio.currentTime >= this.audio.duration - startAfter && !hasCrossover){
+                    console.log("fade out")
+                    this.audio.removeEventListener('ended', ifEnded);
+                    this.Tracklist.next(true);
+                    hasCrossover = true
+                }
+                if (this.audio.currentTime >= this.audio.duration){
+                    console.log("previous stopped")
+                    this.stop();
+                }
+            })
+        }
     }
     
     pause(){
