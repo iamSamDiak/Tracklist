@@ -43,8 +43,9 @@ class Effects{
         }, interval * 1000)
 
         track.audio.addEventListener("pause", () => {
-            console.log("cleaning up")
-            // Clean up the connection
+            if (!this.tracklist.isPlaying){
+                return
+            }
             mediaElementSource.disconnect();
             mediaElementSource = null;
             audioContext.close();
