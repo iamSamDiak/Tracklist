@@ -168,7 +168,9 @@ class Tracklist{
             active = i
         }
         // if playlist is finished
-        this.tracks[active].stop();
+        if (!crossover){
+            this.tracks[active].stop();
+        }
     }
 
     empty(){
