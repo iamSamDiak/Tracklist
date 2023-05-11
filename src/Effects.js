@@ -4,17 +4,22 @@ class Effects{
         this.options = this.options()
     }
 
-    getDuration(funcName){
-        return this.options.find(item => item.name === funcName).duration
+    getDurationStart(funcName){
+        return this.options.find(item => item.name === funcName).durationStart
     }
 
-    fadeIn(track){
+    getDurationEnd(funcName){
+        return this.options.find(item => item.name === funcName).durationEnd
+    }
+
+    fadeInOut(track){
         if (track.audio.currentTime !== 0){
             // condition to call new Track(...).restoreAudio()
             return
         }
         
-        const duration = this.getDuration("Fade in")
+        const durationStart = this.getDurationStart("Fade in/out")
+        const durationEnd = this.getDurationEnd("Fade in/out")
         let audioContext = new AudioContext()
         let mediaElementSource = audioContext.createMediaElementSource(track.audio);
         const gainNode = audioContext.createGain()
@@ -23,25 +28,34 @@ class Effects{
         gainNode.connect(audioContext.destination)
 
         let gain = 0.0
-        gainNode.gain.value = gain;
+        gainNode.gain.value = gain
 
         const interval = 0.1
-        const steps = duration / interval
-        const incrementStep = 1 / steps; // Amount of gain increment for each step
+        const stepsStart = durationStart / interval
+        const stepsEnd = durationEnd / interval
+        const incrementStep = 1 / stepsStart; // Amount of gain increment for each step
+        const decrementStep = 1 / stepsEnd; // Amount of gain increment for each step
 
-        const fadeInInterval = setInterval(() => {
+        const fadeInOutInterval = setInterval(() => {
 
             let currentTime = Math.floor(track.getCurrentTime() / interval)
 
-            gainNode.gain.value = currentTime * incrementStep;
-
-            if (currentTime >= steps) {
-                //clearInterval(fadeInInterval);
+            // fade in
+            if (currentTime >= stepsStart) {
                 gainNode.gain.value = 1
+            } else {
+                gainNode.gain.value = currentTime * incrementStep;
+            }
+
+            // fade out
+            if (currentTime >= track.getDuration() / interval - stepsEnd) {
+                let decrease = track.getDuration() / interval - currentTime
+                gainNode.gain.value = decrease * decrementStep
+                console.log(decrease * decrementStep)
             }
 
             if (tracklist.trackPlaying != track.id){
-                clearInterval(fadeInInterval)
+                clearInterval(fadeInOutInterval)
             }
 
         }, interval * 1000)
@@ -61,16 +75,11 @@ class Effects{
     options(){
         return [
             {
-                name: 'Fade in',
+                name: 'Fade in/out',
                 enabled: true,
-                duration: 10,
-                func: (track) => this.fadeIn(track)
-            },
-            {
-                name: 'Fade out',
-                enabled: false,
-                duration: 10,
-                func: () => console.log('Fade out')
+                durationStart: 10,
+                durationEnd: 15,
+                func: (track) => this.fadeInOut(track)
             }
         ]
     }
