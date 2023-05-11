@@ -56,7 +56,6 @@ class Effects{
                     delta = 0
                 }
                 gainNode.gain.value = (decrease * decrementStep) * delta
-                console.log(gainNode.gain.value)
             }
 
             if (tracklist.trackPlaying != track.id){
@@ -84,6 +83,10 @@ class Effects{
                 enabled: true,
                 durationStart: 10,
                 durationEnd: 15,
+                crossover: {
+                    enabled: true,
+                    startAfter: 7
+                },
                 func: (track) => this.fadeInOut(track)
             }
         ]
