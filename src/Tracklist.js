@@ -165,7 +165,7 @@ class Tracklist{
             }
             active = i
         }
-        //if playlist is finished
+        // if playlist is finished
         this.tracks[active].stop();
     }
 

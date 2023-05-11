@@ -18,4 +18,5 @@ const tracklistSelector = {
     duration: $(".playlist-tracklist-item-duration p")
 }
 
-let tracklist = new Tracklist(activeTrackSelector, tracklistSelector);
+const tracklist = new Tracklist(activeTrackSelector, tracklistSelector);
+const effects = new Effects(tracklist);

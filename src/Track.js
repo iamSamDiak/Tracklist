@@ -1,11 +1,12 @@
 class Track{
-    constructor(audio, metadata, Tracklist, activeSelector){
+    constructor(audio, metadata, Tracklist, activeSelector, effects){
         this.id = (() => Math.random().toString(36).substring(2, 5))()
+        this.path = audio.path
         this.metadata = metadata
-        this.audio = new Audio(audio.path);
-        this.playing = false;
+        this.audio = new Audio(this.path);
         this.Tracklist = Tracklist
         this.activeSelector = activeSelector
+        this.effects = effects
     }
 
     /*
@@ -22,15 +23,29 @@ class Track{
             return
         }
 
+        if (this.audio.currentTime == 0){
+            this.restoreAudio()
+        }
+
         const { selector, button} = this.activeSelector;
 
         this.Tracklist.setActiveTrack(this);
-
         this.audio.volume = this.Tracklist.volume
 
+        //Effects
+        for (const effect of this.effects.options){
+            if (effect.enabled){
+                effect.func(this)
+            }
+        }
+
+        console.log('Playing')
+
+        //At start
         this.audio.play();
+
         selector.find("img").attr("src", button.pause);
-        this.Tracklist.isPlaying = this.playing = true;
+        this.Tracklist.isPlaying = true;
 
         this.audio.addEventListener('ended', () => {
             this.stop()
@@ -45,7 +60,7 @@ class Track{
         }
         
         const { selector, button} = this.activeSelector;
-        this.Tracklist.isPlaying = this.playing = false;
+        this.Tracklist.isPlaying = false;
         this.audio.pause();
         selector.find("img").attr("src", button.play);
     }
@@ -56,7 +71,7 @@ class Track{
         }
         
         const { selector, button} = this.activeSelector;
-        this.Tracklist.isPlaying = this.playing = false;
+        this.Tracklist.isPlaying = false;
         this.audio.pause();
         selector.find("img").attr("src", button.play);
         this.audio.currentTime = 0;
@@ -67,8 +82,11 @@ class Track{
             return
         }
 
+        this.audio.pause()
         this.audio.currentTime = 0;
-        this.play()
+        this.audio.addEventListener('canplay', () => {
+            this.play()
+        })
     }
 
     playAtThatPosition(time){
@@ -98,5 +116,9 @@ class Track{
         const currentTime = this.getCurrentSeconds();
         const progressPercentage = (currentTime / duration) * 100;
         return progressPercentage.toFixed(2);
+    }
+
+    restoreAudio(){
+        this.audio = new Audio(this.path);
     }
 }

@@ -16,7 +16,7 @@ ipcRenderer.on('metadata', (event, metadata) => {
       }
      }
 
-    let track = new Track(filePath, _metadata, tracklist, activeSelector)
+    let track = new Track(filePath, _metadata, tracklist, activeSelector, effects)
 
     $(".progress-bar").prop("disabled", false)
     $(".importTrackInput").val('')
