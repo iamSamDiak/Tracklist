@@ -13,4 +13,5 @@ Where all the bugs are fixed before merging with the ***dev*** branch.
  - Time duration sometimes overlaps
  - Next track doesn't play automatically
  - Volume update ommitted at start
+ - Updating progress bar when paused doesn't play automatically
 
